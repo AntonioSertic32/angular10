@@ -1,0 +1,3 @@
+https://medium.com/techiediaries-com/angular-9-8-authentication-form-angular-formbuilder-formgroup-and-validators-example-with-node-f91729db006f
+http://www.omdbapi.com/?apikey=a6623360&s=saw&page=3
+https://github.com/mehdichekori/OMDbApi
