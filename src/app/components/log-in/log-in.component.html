@@ -1,21 +1,36 @@
-<h1 style="text-align:center">
-    Angular 10 Auth Example
-  </h1>
-  <div class="container">
-    <h2 class="login-header">Log in</h2>
-    <form [formGroup]="authForm" class="login-container" (ngSubmit)="signIn()">
-      <p [ngClass]="{ 'has-error': isSubmitted && formControls.email.errors }">
-        <input type="email" placeholder="Email" formControlName="email">
-      </p>
-      <div *ngIf="isSubmitted && formControls.email.errors" class="help-block">
-        <div *ngIf="formControls.email.errors.required">Email is required</div>
-      </div>
-      <p [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
-        <input type="password" placeholder="Password" formControlName="password">
-      </p>
-      <div *ngIf="isSubmitted && formControls.password.errors" class="help-block">
-        <div *ngIf="formControls.password.errors.required">Password is required</div>
-      </div>
-      <button type="submit" class="btn btn-dark">Log in</button>
-    </form>
-  </div>
+<div class="container">
+  <h2 class="login-header">Log in</h2>
+  <form [formGroup]="authForm" class="login-container" (ngSubmit)="signIn()">
+    <label>Email</label>
+    <input
+      type="text"
+      formControlName="email"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+    />
+    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+      <div *ngIf="f.email.errors.required">Email is required</div>
+    </div>
+
+    <label>Password</label>
+    <input
+      type="password"
+      formControlName="password"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+    />
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+      <div *ngIf="f.password.errors.required">Password is required</div>
+    </div>
+    <div *ngIf="invalid">
+      <p>Invalid email or password</p>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-dark">Log in</button>
+  </form>
+
+  <br />
+  <p>Don't have an account yet?</p>
+  <button routerLink="/register" class="btn btn-success">Register</button>
+</div>
