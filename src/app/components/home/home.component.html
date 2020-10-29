@@ -73,8 +73,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let movie of Movies">
-          <td>{{ id }}</td>
+        <tr *ngFor="let movie of Movies; let i = index">
+          <td>{{ i + 1 }}.</td>
           <td>{{ movie.Title }}</td>
           <td>{{ movie.Year }}</td>
           <td><button class="btn btn-dark">+</button></td>
