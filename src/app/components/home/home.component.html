@@ -1,11 +1,176 @@
-<div style="text-align:center">
-    <h1>
-      Welcome Admin!
-    </h1>
-    <p>
-      <button (click)="logout()">
-        Logout
-      </button>
-    </p>
-    <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Moviium</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="">Discover</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="">My list</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <div class="nav-item dropdown">
+          <a
+            class="nav-link text-light dropdown-toggle"
+            href=""
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            {{ UserInfo.username }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Settings</a>
+          </div>
+        </div>
+        <button class="btn btn-warning" (click)="logout()">Logout</button>
+      </form>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="input-group mt-5 mb-4">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search movies"
+        aria-label="Search movies"
+        aria-describedby="basic-addon2"
+      />
+      <div class="input-group-append">
+        <button class="btn btn-dark" type="button">Search</button>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Year</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Markduhsau sudaiusd duhas</td>
+          <td>Ottsafd sfdds fo</td>
+          <td>
+            <button class="btn btn-dark">+</button>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td><button class="btn btn-dark">+</button></td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td><button class="btn btn-dark">+</button></td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>y sfsdf dsfsdff fsf</td>
+          <td>the Bird</td>
+          <td><button class="btn btn-dark">+</button></td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td>Lar fdf ry</td>
+          <td>the Bird</td>
+          <td><button class="btn btn-dark">+</button></td>
+        </tr>
+        <tr>
+          <th scope="row">6</th>
+          <td>xvxc</td>
+          <td>the Bird</td>
+          <td><button class="btn btn-dark">+</button></td>
+        </tr>
+        <tr>
+          <th scope="row">7</th>
+          <td>xvxc</td>
+          <td>the Bird</td>
+          <td><button class="btn btn-dark">+</button></td>
+        </tr>
+        <tr>
+          <th scope="row">8</th>
+          <td>xvxc</td>
+          <td>the Bird</td>
+          <td><button class="btn btn-dark">+</button></td>
+        </tr>
+        <tr>
+          <th scope="row">9</th>
+          <td>xvxc</td>
+          <td>the Bird</td>
+          <td><button class="btn btn-dark">+</button></td>
+        </tr>
+        <tr>
+          <th scope="row">10</th>
+          <td>xvxc</td>
+          <td>the Bird</td>
+          <td><button class="btn btn-dark">+</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-around">
+      <ul class="pagination">
+        <button class="btn btn-dark mr-5">
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-arrow-left"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+            />
+          </svg>
+        </button>
+
+        <h4><span class="left">1</span> / <span class="right">10</span></h4>
+
+        <button class="btn btn-dark ml-5">
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-arrow-right"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+            />
+          </svg>
+        </button>
+      </ul>
+    </div>
   </div>
+</div>

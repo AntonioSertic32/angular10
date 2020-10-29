@@ -42,8 +42,6 @@ export class AuthService {
   }
 
   public isLoggedIn() {
-    console.log(JSON.parse(localStorage.getItem('ACCESS_TOKEN')));
-
     if (localStorage.getItem('ACCESS_TOKEN') !== null) {
       return true;
     } else {
