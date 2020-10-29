@@ -54,9 +54,12 @@
         placeholder="Search movies"
         aria-label="Search movies"
         aria-describedby="basic-addon2"
+        [(ngModel)]="searchMovie"
       />
       <div class="input-group-append">
-        <button class="btn btn-dark" type="button">Search</button>
+        <button class="btn btn-dark" (click)="omdbMovies()" type="button">
+          Search
+        </button>
       </div>
     </div>
 
@@ -70,66 +73,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Markduhsau sudaiusd duhas</td>
-          <td>Ottsafd sfdds fo</td>
-          <td>
-            <button class="btn btn-dark">+</button>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td><button class="btn btn-dark">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td><button class="btn btn-dark">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td>y sfsdf dsfsdff fsf</td>
-          <td>the Bird</td>
-          <td><button class="btn btn-dark">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">5</th>
-          <td>Lar fdf ry</td>
-          <td>the Bird</td>
-          <td><button class="btn btn-dark">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">6</th>
-          <td>xvxc</td>
-          <td>the Bird</td>
-          <td><button class="btn btn-dark">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">7</th>
-          <td>xvxc</td>
-          <td>the Bird</td>
-          <td><button class="btn btn-dark">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">8</th>
-          <td>xvxc</td>
-          <td>the Bird</td>
-          <td><button class="btn btn-dark">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">9</th>
-          <td>xvxc</td>
-          <td>the Bird</td>
-          <td><button class="btn btn-dark">+</button></td>
-        </tr>
-        <tr>
-          <th scope="row">10</th>
-          <td>xvxc</td>
-          <td>the Bird</td>
+        <tr *ngFor="let movie of Movies">
+          <td>{{ id }}</td>
+          <td>{{ movie.Title }}</td>
+          <td>{{ movie.Year }}</td>
           <td><button class="btn btn-dark">+</button></td>
         </tr>
       </tbody>
