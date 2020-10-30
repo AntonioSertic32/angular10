@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
 
-import { from, of } from 'rxjs';
-import { catchError, delay } from 'rxjs/internal/operators';
+import { delay } from 'rxjs/internal/operators';
 
 import { Router } from '@angular/router';
 

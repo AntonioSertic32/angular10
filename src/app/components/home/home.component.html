@@ -86,7 +86,6 @@
 
     <ng-template #mymodal let-modal>
       <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">{{ Movie.Title }}</h4>
         <button
           type="button"
           class="close"
@@ -97,18 +96,23 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>{{ Movie.Year }}</p>
-        <img src="{{ Movie.Poster }}" alt="poster" />
-        <button class="btn btn-dark">+</button>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-outline-dark"
-          (click)="modal.close('Save click')"
-        >
-          Ok
-        </button>
+        <div class="row">
+          <div class="col-4">
+            <img src="{{ Movie.Poster }}" alt="poster" />
+          </div>
+          <div class="col-8">
+            <h4 class="modal-title" id="modal-basic-title">
+              {{ Movie.Title }}
+            </h4>
+            <p>{{ Movie.Year }}</p>
+            <p>{{ Movie.Runtime }}</p>
+            <p>{{ Movie.Genre }}</p>
+            <p>{{ Movie.imdbRating }} / 10</p>
+
+            <p>{{ Movie.Plot }}</p>
+            <button class="btn btn-success" (click)="addMovie()">+</button>
+          </div>
+        </div>
       </div>
     </ng-template>
 

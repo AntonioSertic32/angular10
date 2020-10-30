@@ -27,4 +27,18 @@ export class OmdbService {
         }
       );
   }
+
+  public async getMovie(title, year) {
+    this.response = await this.httpClient
+      .get<any>(this.apiURL + 't=' + title + '&y=' + year)
+      .pipe(delay(500))
+      .subscribe(
+        (data) => {
+          localStorage.setItem('MOVIE', JSON.stringify(data));
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
 }
