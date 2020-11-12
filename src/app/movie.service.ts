@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay } from 'rxjs/internal/operators';
+import { delay, concatMap } from 'rxjs/internal/operators';
 
 import { Router } from '@angular/router';
 
@@ -11,6 +11,9 @@ export class MovieService {
   private apiURL = 'https://localhost:44358/api';
   public message: string = 'Uninitialized';
   public response;
+
+  // PostMovies()
+  // PostRecords()
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
@@ -28,7 +31,8 @@ export class MovieService {
     _poster,
     _metascore,
     _imdbRating,
-    _production
+    _production,
+    userId
   ) {
     this.response = await this.httpClient
       .post<any>(this.apiURL + '/Movies/PostMovies', {
@@ -50,8 +54,9 @@ export class MovieService {
       .pipe(delay(500))
       .subscribe(
         (data) => {
-          console.log('Uspješno dodano! ' + data);
+          console.log('Uspješno dodano!');
           this.getMovies();
+          this.getMovieId(_title, userId, 8);
         },
         (err) => {
           console.log('Greška! ' + err);
@@ -59,23 +64,27 @@ export class MovieService {
       );
   }
 
-  public getMovieId(title) {
+  public getMovieId(title, userid, rate) {
+    console.log('aloo');
     var allMovies = JSON.parse(localStorage.getItem('ALL_MOVIES'));
     allMovies.forEach(function (movie) {
       if (movie.title == title) {
-        localStorage.setItem('MOVIEID', JSON.stringify(movie.movieID));
+        console.log('Uspjesno dohvacen id dodanog filma');
+        //localStorage.setItem('MOVIEID', JSON.stringify(movie.movieID));
+
+        this.addRecord(movie.movieID, userid, rate);
       }
     });
   }
 
-  public async addRecord(userid, rate) {
-    var id = JSON.parse(localStorage.getItem('MOVIEID'));
-    console.log(userid, rate, id);
+  public async addRecord(movieid, userid, rate) {
+    //var id = JSON.parse(localStorage.getItem('MOVIEID'));
+    console.log(userid, rate, movieid);
     this.response = await this.httpClient
       .post<any>(this.apiURL + '/Records/PostRecords', {
         rate: rate,
         userid: userid,
-        movieid: id,
+        movieid: movieid,
       })
       .pipe(delay(500))
       .subscribe(

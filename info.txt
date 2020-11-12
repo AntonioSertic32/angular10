@@ -1,3 +1,39 @@
 https://medium.com/techiediaries-com/angular-9-8-authentication-form-angular-formbuilder-formgroup-and-validators-example-with-node-f91729db006f
 http://www.omdbapi.com/?apikey=a6623360&s=saw&page=3
 https://github.com/mehdichekori/OMDbApi
+
+
+To Do!
+
+    *home.component.ts
+        - omdbMovies() asinkrono
+        -
+
+    *movie.service.ts
+        - Dodavanje filma i provjera da li postoji (automatska provjera kod dohvacanja filmova sa omdb-a, kvacica umjesto +)
+        - Dohvacanje id-a tog filma i dodavanje rekorda
+        - Dodavanje vlastite ocjene
+        -
+
+    *omdb.service.ts
+        - Pagination
+        -
+
+    *auth.service.ts
+        - Tokeni
+        -
+
+    *pagenotfound
+        - Dizajn i poruka
+        -
+    
+    *log-in
+        - Dizajn
+    
+    *home
+        - Razdvojiti Discover i My list u zasebne komponente i napraviti rutiranje
+
+        *my-list
+            - All*
+
+        - Dodati i komponentu za Settings te dati pregled profila uz mogucu promjenu lozinke i username-a

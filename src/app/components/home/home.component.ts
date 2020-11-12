@@ -23,31 +23,30 @@ export class HomeComponent implements OnInit {
   public UserInfo: any = [];
   public Movies: any = [];
   public Movie: any = [];
-  public id = 1;
   searchMovie: string;
 
+  // Dohvacanje informacija o logiranom korisniku iz localStorage-a
   ngOnInit(): void {
     this.UserInfo = JSON.parse(localStorage.getItem('ACCESS_TOKEN'));
-    console.log(this.UserInfo);
   }
 
+  // Odjava
   logout() {
     this.authService.logout();
     this.router.navigateByUrl('/login');
   }
 
+  // Dohvacanje filmova sa api-a
   omdbMovies() {
-    console.log(this.searchMovie);
     this.omdbService.getMovies(this.searchMovie);
     setTimeout(() => {
       this.Movies = JSON.parse(localStorage.getItem('MOVIES'));
       this.Movies = this.Movies.Search;
-      console.log(this.Movies);
     }, 1000);
   }
 
+  // Dodavanje odabranog filma
   addMovie() {
-    /*
     this.movieService.addMovie(
       this.Movie.Title,
       this.Movie.Released,
@@ -62,29 +61,20 @@ export class HomeComponent implements OnInit {
       this.Movie.Poster,
       this.Movie.Metascore,
       this.Movie.imdbRating,
-      this.Movie.Production
+      this.Movie.Production,
+      this.UserInfo.userID
     );
-    setTimeout(() => {
-      this.movieService.getMovieId(this.Movie.Title);
-      this.movieService.addRecord(this.UserInfo.userID, 8);
-    }, 1500);
-*/
-    this.movieService.getMovieId(this.Movie.Title);
-    this.movieService.addRecord(this.UserInfo.userID, 8);
   }
 
-  /*  --------------------------  */
+  /*  -------------------------- Otvaranje modala  */
 
   closeResult: string;
-
   open(content, i) {
     this.Movie = [];
-    console.log(this.Movies[i].Title, this.Movies[i].Year);
 
     this.omdbService.getMovie(this.Movies[i].Title, this.Movies[i].Year);
     setTimeout(() => {
       this.Movie = JSON.parse(localStorage.getItem('MOVIE'));
-      console.log(this.Movie);
     }, 1000);
 
     this.modalService.open(content, { windowClass: 'my-class' }).result.then(
