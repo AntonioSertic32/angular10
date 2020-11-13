@@ -21,35 +21,26 @@ export class DiscoverComponent implements OnInit {
   public Movies: any = [];
   public Movie: any = [];
   searchMovie: string;
+  myrate: string;
+  pages: any = [0];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.UserInfo = JSON.parse(localStorage.getItem('ACCESS_TOKEN'));
+  }
 
   // Dohvacanje filmova sa api-a
   async omdbMovies() {
     this.omdbService.getMovies(this.searchMovie).then((value) => {
-      this.Movies = value;
+      this.Movies = value[0];
+      this.pages = Math.ceil(parseInt(value[1]) / 10);
     });
   }
 
   // Dodavanje odabranog filma
   addMovie() {
-    this.movieService.addMovie(
-      this.Movie.Title,
-      this.Movie.Released,
-      this.Movie.Runtime,
-      this.Movie.Genre,
-      this.Movie.Director,
-      this.Movie.Writer,
-      this.Movie.Actors,
-      this.Movie.Plot,
-      this.Movie.Language,
-      this.Movie.Awards,
-      this.Movie.Poster,
-      this.Movie.Metascore,
-      this.Movie.imdbRating,
-      this.Movie.Production,
-      this.UserInfo.userID
-    );
+    this.movieService.addMovie(this.Movie).then((value) => {
+      this.movieService.addRecord(value, this.UserInfo.userID, this.myrate);
+    });
   }
 
   /*  -------------------------- Otvaranje modala  */

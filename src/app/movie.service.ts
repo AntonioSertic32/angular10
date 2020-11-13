@@ -12,89 +12,55 @@ export class MovieService {
   public message: string = 'Uninitialized';
   public response;
 
-  // PostMovies()
-  // PostRecords()
-
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  public async addMovie(
-    _title,
-    _released,
-    _runtime,
-    _genre,
-    _director,
-    _writer,
-    _actors,
-    _plot,
-    _language,
-    _awards,
-    _poster,
-    _metascore,
-    _imdbRating,
-    _production,
-    userId
-  ) {
-    this.response = await this.httpClient
-      .post<any>(this.apiURL + '/Movies/PostMovies', {
-        title: _title,
-        released: _released,
-        runtime: _runtime,
-        genre: _genre,
-        director: _director,
-        writer: _writer,
-        actors: _actors,
-        plot: _plot,
-        language: _language,
-        awards: _awards,
-        poster: _poster,
-        metascore: _metascore,
-        imdbRating: _imdbRating,
-        production: _production,
-      })
-      .pipe(delay(500))
-      .subscribe(
-        (data) => {
-          console.log('Uspješno dodano!');
-          this.getMovies();
-          this.getMovieId(_title, userId, 8);
-        },
-        (err) => {
-          console.log('Greška! ' + err);
-        }
-      );
-  }
-
-  public getMovieId(title, userid, rate) {
-    console.log('aloo');
-    var allMovies = JSON.parse(localStorage.getItem('ALL_MOVIES'));
-    allMovies.forEach(function (movie) {
-      if (movie.title == title) {
-        console.log('Uspjesno dohvacen id dodanog filma');
-        //localStorage.setItem('MOVIEID', JSON.stringify(movie.movieID));
-
-        this.addRecord(movie.movieID, userid, rate);
-      }
+  public async addMovie(Movie) {
+    return new Promise((resolve) => {
+      this.response = this.httpClient
+        .post<any>(this.apiURL + '/Movies/PostMovies', {
+          title: Movie.Title,
+          released: Movie.Released,
+          runtime: Movie.Runtime,
+          genre: Movie.Genre,
+          director: Movie.Director,
+          writer: Movie.Writer,
+          actors: Movie.Actors,
+          plot: Movie.Plot,
+          language: Movie.Language,
+          awards: Movie.Awards,
+          poster: Movie.Poster,
+          metascore: Movie.Metascore,
+          imdbRating: Movie.imdbRating,
+          production: Movie.Production,
+        })
+        .subscribe(
+          (data) => {
+            resolve(data.movieID);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
     });
   }
 
   public async addRecord(movieid, userid, rate) {
-    //var id = JSON.parse(localStorage.getItem('MOVIEID'));
-    console.log(userid, rate, movieid);
-    this.response = await this.httpClient
-      .post<any>(this.apiURL + '/Records/PostRecords', {
-        rate: rate,
-        userid: userid,
-        movieid: movieid,
-      })
-      .pipe(delay(500))
-      .subscribe(
-        (data) => {
-          console.log('Uspješno dodan record!');
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    return new Promise((resolve) => {
+      this.response = this.httpClient
+        .post<any>(this.apiURL + '/Records/PostRecords', {
+          rate: rate,
+          userid: userid,
+          movieid: movieid,
+        })
+        .subscribe(
+          (data) => {
+            resolve(data);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    });
   }
 
   public async getMovies() {
@@ -110,5 +76,20 @@ export class MovieService {
           console.log(err);
         }
       );
+  }
+
+  public async getUserMovies(userID) {
+    return new Promise((resolve) => {
+      this.response = this.httpClient
+        .get<any>(this.apiURL + '/Records/GetRecordsByUserId/' + userID)
+        .subscribe(
+          (data) => {
+            resolve(data);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    });
   }
 }

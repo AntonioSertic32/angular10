@@ -62,6 +62,7 @@
           <p>{{ Movie.imdbRating }} / 10</p>
 
           <p>{{ Movie.Plot }}</p>
+          <input type="number" class="form-control" [(ngModel)]="myrate" />
           <button class="btn btn-success" (click)="addMovie()">+</button>
         </div>
       </div>
@@ -70,7 +71,7 @@
 
   <div class="d-flex justify-content-around">
     <ul class="pagination">
-      <button class="btn btn-dark mr-5">
+      <button class="btn btn-dark mr-5" disabled>
         <svg
           width="1em"
           height="1em"
@@ -86,9 +87,12 @@
         </svg>
       </button>
 
-      <h4><span class="left">1</span> / <span class="right">10</span></h4>
+      <h4>
+        <span class="left">0</span> /
+        <span class="right" [innerHTML]="pages">0</span>
+      </h4>
 
-      <button class="btn btn-dark ml-5">
+      <button class="btn btn-dark ml-5" disabled>
         <svg
           width="1em"
           height="1em"

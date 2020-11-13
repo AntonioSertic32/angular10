@@ -6,10 +6,9 @@ https://github.com/mehdichekori/OMDbApi
 To Do!
 
     *movie.service.ts
-        - Dodavanje filma i provjera da li postoji (automatska provjera kod dohvacanja filmova sa omdb-a, kvacica umjesto +)
-        - Dohvacanje id-a tog filma i dodavanje rekorda
-        - Dodavanje vlastite ocjene
-        -
+        - Provjera da li je film dodan (oznaka kvacica)
+        - Dizajn modala
+        - Nakon dodavanja popup sa porukom i zatvaranje modala
 
     *omdb.service.ts
         - Pagination
@@ -27,8 +26,6 @@ To Do!
         - Dizajn
     
     *home
-        - Razdvojiti Discover i My list u zasebne komponente i napraviti rutiranje
-
         *my-list
             - All*
 

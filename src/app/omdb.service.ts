@@ -18,10 +18,9 @@ export class OmdbService {
     return new Promise((resolve) => {
       this.response = this.httpClient
         .get<any>(this.apiURL + 's=' + title)
-        .pipe(delay(500))
         .subscribe(
           (data) => {
-            resolve(data.Search);
+            resolve([data.Search, data.totalResults]);
           },
           (err) => {
             console.log(err);
@@ -34,7 +33,6 @@ export class OmdbService {
     return new Promise((resolve) => {
       this.response = this.httpClient
         .get<any>(this.apiURL + 't=' + title + '&y=' + year)
-        .pipe(delay(500))
         .subscribe(
           (data) => {
             resolve(data);
