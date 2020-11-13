@@ -6,13 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { RegisterComponent } from './components/register/register.component';
-import { HomeComponent } from './components/home/home.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { HomeComponent } from './components/home/home.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MyListComponent } from './components/home/my-list/my-list.component';
+import { DiscoverComponent } from './components/home/discover/discover.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterComponent,
     HomeComponent,
     PagenotfoundComponent,
+    MyListComponent,
+    DiscoverComponent,
   ],
   imports: [
     BrowserModule,

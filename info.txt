@@ -5,10 +5,6 @@ https://github.com/mehdichekori/OMDbApi
 
 To Do!
 
-    *home.component.ts
-        - omdbMovies() asinkrono
-        -
-
     *movie.service.ts
         - Dodavanje filma i provjera da li postoji (automatska provjera kod dohvacanja filmova sa omdb-a, kvacica umjesto +)
         - Dohvacanje id-a tog filma i dodavanje rekorda

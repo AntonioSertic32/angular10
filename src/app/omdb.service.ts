@@ -15,30 +15,34 @@ export class OmdbService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   public async getMovies(title) {
-    this.response = await this.httpClient
-      .get<any>(this.apiURL + 's=' + title)
-      .pipe(delay(500))
-      .subscribe(
-        (data) => {
-          localStorage.setItem('MOVIES', JSON.stringify(data));
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    return new Promise((resolve) => {
+      this.response = this.httpClient
+        .get<any>(this.apiURL + 's=' + title)
+        .pipe(delay(500))
+        .subscribe(
+          (data) => {
+            resolve(data.Search);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    });
   }
 
   public async getMovie(title, year) {
-    this.response = await this.httpClient
-      .get<any>(this.apiURL + 't=' + title + '&y=' + year)
-      .pipe(delay(500))
-      .subscribe(
-        (data) => {
-          localStorage.setItem('MOVIE', JSON.stringify(data));
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    return new Promise((resolve) => {
+      this.response = this.httpClient
+        .get<any>(this.apiURL + 't=' + title + '&y=' + year)
+        .pipe(delay(500))
+        .subscribe(
+          (data) => {
+            resolve(data);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    });
   }
 }
