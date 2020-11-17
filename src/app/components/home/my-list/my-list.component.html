@@ -1,31 +1,116 @@
-<table class="table table-striped mt-5">
-  <thead class="thead-dark">
-    <tr>
-      <th>Naziv</th>
-      <th>Godina</th>
-      <th>Trajanje</th>
-      <th>Žanr</th>
-      <th>Metascore</th>
-      <th>IMDB</th>
-      <th>Moja</th>
-      <th>Production</th>
-      <th>Opcije</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let dataItem of FilmList">
-      <td>{{ dataItem.movie.title }}</td>
-      <td>{{ dataItem.movie.released }}</td>
-      <td>{{ dataItem.movie.runtime }}</td>
-      <td>{{ dataItem.movie.genre }}</td>
-      <td>{{ dataItem.movie.metascore }}</td>
-      <td>{{ dataItem.movie.imdbRating }}</td>
-      <td>{{ dataItem.rate }}</td>
-      <td>{{ dataItem.movie.production }}</td>
-      <td>
-        <button type="button" class="btn btn-success mr-1">Uredi</button>
-        <button type="button" class="btn btn-danger mr-1">Obriši</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="mylist">
+  <table class="table table-striped mt-5">
+    <thead class="thead-dark">
+      <tr>
+        <th>#</th>
+        <th>Naziv</th>
+        <th>Godina</th>
+        <th>Trajanje</th>
+        <th>Žanr</th>
+        <th>Metascore</th>
+        <th>IMDB</th>
+        <th>Moja</th>
+        <th>Opcije</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dataItem of FilmList; let i = index">
+        <td>{{ i + 1 }}.</td>
+        <td>{{ dataItem.movie.title }}</td>
+        <td>{{ dataItem.movie.released }}</td>
+        <td>{{ dataItem.movie.runtime }}</td>
+        <td>{{ dataItem.movie.genre }}</td>
+        <td>{{ dataItem.movie.metascore }}</td>
+        <td>{{ dataItem.movie.imdbRating }}</td>
+        <td>{{ dataItem.rate }}</td>
+        <td>
+          <button
+            (click)="open(uredimodal, i)"
+            type="button"
+            class="btn btn-success mr-1"
+          >
+            Detalji
+          </button>
+          <button
+            (click)="open(obrisimodal, i)"
+            type="button"
+            class="btn btn-danger"
+          >
+            Obriši
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #uredimodal let-modal>
+    <div class="modal-header">
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-4">
+          <img src="{{ Movie.movie.poster }}" alt="poster" />
+        </div>
+        <div class="col-1"></div>
+        <div class="col-7">
+          <h3 class="modal-title" id="modal-basic-title">
+            {{ Movie.movie.title }}
+          </h3>
+          <p>{{ Movie.movie.year }}</p>
+          <p>{{ Movie.movie.runtime }}</p>
+          <p>{{ Movie.movie.genre }}</p>
+          <p>{{ Movie.movie.imdbRating }} / 10</p>
+
+          <p>{{ Movie.movie.plot }}</p>
+          <input
+            type="number"
+            min="0"
+            max="10"
+            class="form-control w-25"
+            [(ngModel)]="MyRate"
+            placeholder="0"
+          />
+          <button class="btn btn-success mt-4" (click)="urediRecord(Movie)">
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #obrisimodal let-modal>
+    <div class="modal-header">
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div>
+          <h4 class="modal-title" id="modal-basic-title">
+            Jeste li sigurni da želite obrisati: {{ Movie.movie.title }} ?
+          </h4>
+          <button
+            class="btn btn-danger mt-4"
+            (click)="obrisiRecord(Movie.recordID)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

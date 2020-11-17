@@ -64,18 +64,18 @@ export class MovieService {
   }
 
   public async getMovies() {
-    this.response = await this.httpClient
-      .get<any>(this.apiURL + '/Movies/GetMovies')
-      .pipe(delay(500))
-      .subscribe(
-        (data) => {
-          localStorage.setItem('ALL_MOVIES', JSON.stringify(data));
-          console.log('Dohvaceni svi filmovi!');
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    return new Promise((resolve) => {
+      this.response = this.httpClient
+        .get<any>(this.apiURL + '/Movies/GetMovies')
+        .subscribe(
+          (data) => {
+            resolve(data);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    });
   }
 
   public async getUserMovies(userID) {
@@ -85,6 +85,37 @@ export class MovieService {
         .subscribe(
           (data) => {
             resolve(data);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    });
+  }
+
+  public async deleteRecord(recordID) {
+    return new Promise((resolve) => {
+      this.response = this.httpClient
+        .delete<any>(this.apiURL + '/Records/DeleteRecord/' + recordID)
+        .subscribe(
+          (data) => {
+            console.log(data);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    });
+  }
+
+  public async updateRecord(movie) {
+    console.log(movie);
+    return new Promise((resolve) => {
+      this.response = this.httpClient
+        .put<any>(this.apiURL + '/Records/PutRecord', movie)
+        .subscribe(
+          (data) => {
+            console.log(data);
           },
           (err) => {
             console.log(err);

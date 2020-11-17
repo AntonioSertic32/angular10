@@ -38,12 +38,8 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.authService.signUp(this.regForm.value);
-
-    setTimeout(() => {
-      if (localStorage.getItem('ERROR') == 'exist') {
-        this.exist = true;
-      }
-    }, 800);
+    this.authService.signUp(this.regForm.value).then((value) => {
+      this.exist = true;
+    });
   }
 }

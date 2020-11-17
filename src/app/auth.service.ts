@@ -5,6 +5,7 @@ import { User } from './user';
 import { delay } from 'rxjs/internal/operators';
 
 import { Router } from '@angular/router';
+import { rejects } from 'assert';
 
 @Injectable({
   providedIn: 'root',
@@ -17,27 +18,26 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   public async signIn(userData: User) {
-    this.response = await this.httpClient
-      .get<any>(
-        this.apiURL +
-          '/Users/GetUsers/' +
-          userData.password +
-          '/' +
-          userData.email +
-          ''
-      )
-      .pipe(delay(500))
-      .subscribe(
-        (data) => {
-          localStorage.setItem('ACCESS_TOKEN', JSON.stringify(data));
-          this.router.navigateByUrl('/home');
-        },
-        (err) => {
-          if (err.status == 404) {
-            localStorage.setItem('ERROR', '404');
+    return new Promise((resolve) => {
+      this.response = this.httpClient
+        .get<any>(
+          this.apiURL +
+            '/Users/GetUsers/' +
+            userData.password +
+            '/' +
+            userData.email +
+            ''
+        )
+        .subscribe(
+          (data) => {
+            localStorage.setItem('ACCESS_TOKEN', JSON.stringify(data));
+            this.router.navigateByUrl('/home');
+          },
+          (err) => {
+            resolve(err.error.title);
           }
-        }
-      );
+        );
+    });
   }
 
   public isLoggedIn() {
@@ -54,22 +54,23 @@ export class AuthService {
   }
 
   public async signUp(userData: User) {
-    this.response = await this.httpClient
-      .post<any>(this.apiURL + '/Users/PostUsers', {
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        password: userData.password,
-        username: userData.username,
-        email: userData.email,
-      })
-      .pipe(delay(500))
-      .subscribe(
-        (data) => {
-          this.router.navigateByUrl('/login');
-        },
-        (err) => {
-          localStorage.setItem('ERROR', 'exist');
-        }
-      );
+    return new Promise((resolve) => {
+      this.response = this.httpClient
+        .post<any>(this.apiURL + '/Users/PostUsers', {
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          password: userData.password,
+          username: userData.username,
+          email: userData.email,
+        })
+        .subscribe(
+          (data) => {
+            this.router.navigateByUrl('/login');
+          },
+          (err) => {
+            resolve(err.error.title);
+          }
+        );
+    });
   }
 }

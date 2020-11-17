@@ -35,12 +35,8 @@ export class LogInComponent implements OnInit {
       return;
     }
 
-    this.authService.signIn(this.authForm.value);
-
-    setTimeout(() => {
-      if (localStorage.getItem('ERROR') == '404') {
-        this.invalid = true;
-      }
-    }, 800);
+    this.authService.signIn(this.authForm.value).then((value) => {
+      this.invalid = true;
+    });
   }
 }

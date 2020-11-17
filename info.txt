@@ -5,21 +5,5 @@ https://github.com/mehdichekori/OMDbApi
 
 To Do!
 
-    *movie.service.ts
-        - Provjera da li je film dodan (oznaka kvacica)
-        - Dizajn modala
-        - Nakon dodavanja popup sa porukom i zatvaranje modala
-
-    *auth.service.ts
-        - Tokeni
-        -
-    
-    *log-in
-        - Dizajn
-    
-    *home
-        *my-list
-            - Uredi
-            - Obrisi
-
-        - Dodati i komponentu za Settings te dati pregled profila uz mogucu promjenu lozinke i username-a
+    *Settings
+        - Komponenta za promjenu usernamea i lozinke

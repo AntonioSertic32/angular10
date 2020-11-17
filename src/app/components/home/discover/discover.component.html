@@ -103,10 +103,11 @@
         <div class="col-4">
           <img src="{{ Movie.Poster }}" alt="poster" />
         </div>
-        <div class="col-8">
-          <h4 class="modal-title" id="modal-basic-title">
+        <div class="col-1"></div>
+        <div class="col-7">
+          <h3 class="modal-title" id="modal-basic-title">
             {{ Movie.Title }}
-          </h4>
+          </h3>
           <p>{{ Movie.Year }}</p>
           <p>{{ Movie.Runtime }}</p>
           <p>{{ Movie.Genre }}</p>
@@ -117,11 +118,16 @@
             type="number"
             min="0"
             max="10"
-            class="form-control"
+            class="form-control w-25"
             [(ngModel)]="myrate"
             placeholder="0"
           />
-          <button class="btn btn-success" (click)="addMovie()">+</button>
+          <button
+            class="btn btn-success mt-4"
+            (click)="addMovie(); modal.dismiss('Cross click')"
+          >
+            +
+          </button>
         </div>
       </div>
     </div>
