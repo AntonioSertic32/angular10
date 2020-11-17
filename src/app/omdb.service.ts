@@ -43,4 +43,19 @@ export class OmdbService {
         );
     });
   }
+
+  public async pagination(title, page) {
+    return new Promise((resolve) => {
+      this.response = this.httpClient
+        .get<any>(this.apiURL + 's=' + title + '&page=' + page)
+        .subscribe(
+          (data) => {
+            resolve([data.Search, data.totalResults]);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    });
+  }
 }

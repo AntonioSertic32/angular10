@@ -22,7 +22,11 @@ export class DiscoverComponent implements OnInit {
   public Movie: any = [];
   searchMovie: string;
   myrate: string;
-  pages: any = [0];
+  pages = 1;
+  currentPage = 1;
+  isDisabledLeft = true;
+  isDisabledRight = false;
+  totalResults = 0;
 
   ngOnInit(): void {
     this.UserInfo = JSON.parse(localStorage.getItem('ACCESS_TOKEN'));
@@ -30,9 +34,12 @@ export class DiscoverComponent implements OnInit {
 
   // Dohvacanje filmova sa api-a
   async omdbMovies() {
+    this.currentPage = 1;
+
     this.omdbService.getMovies(this.searchMovie).then((value) => {
       this.Movies = value[0];
       this.pages = Math.ceil(parseInt(value[1]) / 10);
+      this.totalResults = value[1];
     });
   }
 
@@ -41,6 +48,52 @@ export class DiscoverComponent implements OnInit {
     this.movieService.addMovie(this.Movie).then((value) => {
       this.movieService.addRecord(value, this.UserInfo.userID, this.myrate);
     });
+  }
+
+  // Pagination
+
+  prevPage() {
+    this.currentPage--;
+    this.omdbService
+      .pagination(this.searchMovie, this.currentPage)
+      .then((value) => {
+        this.Movies = value[0];
+        this.pages = Math.ceil(parseInt(value[1]) / 10);
+        this.totalResults = value[1];
+      });
+
+    if (this.currentPage == 1) {
+      this.isDisabledLeft = true;
+    }
+    if (this.currentPage != this.pages) {
+      this.isDisabledRight = false;
+    }
+  }
+
+  nextPage() {
+    this.currentPage++;
+    this.omdbService
+      .pagination(this.searchMovie, this.currentPage)
+      .then((value) => {
+        this.Movies = value[0];
+        this.pages = Math.ceil(parseInt(value[1]) / 10);
+        this.totalResults = value[1];
+      });
+
+    if (this.currentPage > 1) {
+      this.isDisabledLeft = false;
+    }
+    if (this.currentPage == this.pages) {
+      this.isDisabledRight = true;
+    }
+  }
+
+  dohvatiRedniBroj(i) {
+    if (this.currentPage == 1) {
+      return i + 1;
+    } else {
+      return this.currentPage * 10 + i - 9;
+    }
   }
 
   /*  -------------------------- Otvaranje modala  */

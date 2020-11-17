@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MyListComponent } from './components/home/my-list/my-list.component';
 import { DiscoverComponent } from './components/home/discover/discover.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DiscoverComponent } from './components/home/discover/discover.component
     HttpClientModule,
     CommonModule,
     NgbModule,
+    NoopAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

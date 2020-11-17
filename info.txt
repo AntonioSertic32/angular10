@@ -10,16 +10,8 @@ To Do!
         - Dizajn modala
         - Nakon dodavanja popup sa porukom i zatvaranje modala
 
-    *omdb.service.ts
-        - Pagination
-        -
-
     *auth.service.ts
         - Tokeni
-        -
-
-    *pagenotfound
-        - Dizajn i poruka
         -
     
     *log-in
@@ -27,6 +19,7 @@ To Do!
     
     *home
         *my-list
-            - All*
+            - Uredi
+            - Obrisi
 
         - Dodati i komponentu za Settings te dati pregled profila uz mogucu promjenu lozinke i username-a

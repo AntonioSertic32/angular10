@@ -1,10 +1,14 @@
-<table class="table table-striped">
-  <thead>
+<table class="table table-striped mt-5">
+  <thead class="thead-dark">
     <tr>
       <th>Naziv</th>
+      <th>Godina</th>
       <th>Trajanje</th>
       <th>Žanr</th>
+      <th>Metascore</th>
       <th>IMDB</th>
+      <th>Moja</th>
+      <th>Production</th>
       <th>Opcije</th>
     </tr>
   </thead>
@@ -12,11 +16,15 @@
     <tr *ngFor="let dataItem of FilmList">
       <td>{{ dataItem.movie.title }}</td>
       <td>{{ dataItem.movie.released }}</td>
+      <td>{{ dataItem.movie.runtime }}</td>
       <td>{{ dataItem.movie.genre }}</td>
+      <td>{{ dataItem.movie.metascore }}</td>
       <td>{{ dataItem.movie.imdbRating }}</td>
+      <td>{{ dataItem.rate }}</td>
+      <td>{{ dataItem.movie.production }}</td>
       <td>
-        <button type="button" class="btn btn-light mr-1">Uredi</button>
-        <button type="button" class="btn btn-light mr-1">Obriši</button>
+        <button type="button" class="btn btn-success mr-1">Uredi</button>
+        <button type="button" class="btn btn-danger mr-1">Obriši</button>
       </td>
     </tr>
   </tbody>

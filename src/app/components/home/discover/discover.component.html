@@ -26,7 +26,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let movie of Movies; let i = index">
-        <td>{{ i + 1 }}.</td>
+        <td>{{ dohvatiRedniBroj(i) }}.</td>
         <td>{{ movie.Title }}</td>
         <td>{{ movie.Year }}</td>
         <td>
@@ -35,6 +35,57 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="d-flex justify-content-around">
+    <ul class="pagination">
+      <button
+        class="btn btn-dark mr-5"
+        id="prevButton"
+        [disabled]="isDisabledLeft"
+        (click)="prevPage()"
+      >
+        <svg
+          width="1em"
+          height="1em"
+          viewBox="0 0 16 16"
+          class="bi bi-arrow-left"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+          />
+        </svg>
+      </button>
+
+      <h4>
+        <span class="left" [innerHTML]="currentPage"></span> /
+        <span class="right" [innerHTML]="pages"></span>
+      </h4>
+
+      <button
+        class="btn btn-dark ml-5"
+        id="nextButton"
+        [disabled]="isDisabledRight"
+        (click)="nextPage()"
+      >
+        <svg
+          width="1em"
+          height="1em"
+          viewBox="0 0 16 16"
+          class="bi bi-arrow-right"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+          />
+        </svg>
+      </button>
+    </ul>
+  </div>
 
   <ng-template #mymodal let-modal>
     <div class="modal-header">
@@ -62,51 +113,17 @@
           <p>{{ Movie.imdbRating }} / 10</p>
 
           <p>{{ Movie.Plot }}</p>
-          <input type="number" class="form-control" [(ngModel)]="myrate" />
+          <input
+            type="number"
+            min="0"
+            max="10"
+            class="form-control"
+            [(ngModel)]="myrate"
+            placeholder="0"
+          />
           <button class="btn btn-success" (click)="addMovie()">+</button>
         </div>
       </div>
     </div>
   </ng-template>
-
-  <div class="d-flex justify-content-around">
-    <ul class="pagination">
-      <button class="btn btn-dark mr-5" disabled>
-        <svg
-          width="1em"
-          height="1em"
-          viewBox="0 0 16 16"
-          class="bi bi-arrow-left"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-          />
-        </svg>
-      </button>
-
-      <h4>
-        <span class="left">0</span> /
-        <span class="right" [innerHTML]="pages">0</span>
-      </h4>
-
-      <button class="btn btn-dark ml-5" disabled>
-        <svg
-          width="1em"
-          height="1em"
-          viewBox="0 0 16 16"
-          class="bi bi-arrow-right"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-          />
-        </svg>
-      </button>
-    </ul>
-  </div>
 </div>
